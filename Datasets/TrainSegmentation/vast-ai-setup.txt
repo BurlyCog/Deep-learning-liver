@@ -1,0 +1,28 @@
+apt-get update
+apt-get install -y curl git-core
+
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+
+cat > ~/.ssh/id_rsa <<- EOM
+-----BEGIN OPENSSH PRIVATE KEY-----
+YOUR SSH PRIVATE KEY GOES HERE
+-----END OPENSSH PRIVATE KEY-----
+EOM
+chmod 400 ~/.ssh/id_rsa
+
+ssh-keygen -F gitlab.com || ssh-keyscan gitlab.com >>~/.ssh/known_hosts
+
+git config --global user.email "mohdahm60.com"
+git config --global user.name "Ahmed Shaikh"
+
+test -e doge-detector || git clone git@gitlab.com:org-name/repo-name.git
+
+cd repo-name
+
+git pull
+
+# ---- put below in a separate cell -------
+
+git pull
+git commit . -m 'updated notebook'
+git push
